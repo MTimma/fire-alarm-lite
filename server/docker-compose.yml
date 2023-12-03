@@ -7,6 +7,4 @@ services:
     ports:
       - "8080:8080"
       - "5050:5050"
-    volumes:
-      - $HOME:$HOME
     restart: on-failure
