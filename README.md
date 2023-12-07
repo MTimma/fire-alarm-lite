@@ -10,6 +10,7 @@ The apartment building I live in has very sensitive smoke detectors in apartment
 This web app informs foreigners about what to do during a fire alarm and allows them to leave a message in case it is a 100% false alarm.
 
 Feel free to change the text and re-use it for similar situations
+
 Hosted solution:
 
 <a href="https://lacplesa24.eu/fire-alarm">lacplesa24.eu/fire-alarm</a>
