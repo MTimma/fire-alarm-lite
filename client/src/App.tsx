@@ -14,15 +14,16 @@ export interface NewMessage {
 } 
 
 function App() {
-  const maxApartment = 54;
+  const MAX_LENGTH_COMMENT = 1000
+  const MAX_APARTMENT = 54;
   const [submitStatus, setSubmitStatus] = useState("")
   const [submitStatusType, setSubmitStatusType] = useState("success")
   const [message, setMessage] = useState<NewMessage>({isFireDepartmentCalled: false, apartment: 1, comment: ""})
   const [loading, setLoading] = useState(false)
 
   const handleApartmentBlur = (e: any) => {
-    if(e.currentTarget.value>maxApartment) {
-      e.currentTarget.value = maxApartment
+    if(e.currentTarget.value>MAX_APARTMENT) {
+      e.currentTarget.value = MAX_APARTMENT
     }
     if(e.currentTarget.value<1) {
       e.currentTarget.value = 1
@@ -31,14 +32,19 @@ function App() {
   }
 
   const validateMessage = (): boolean => {
-    if(message.apartment<1 || message.apartment > 54) {
+    if(message.apartment<1 || message.apartment > MAX_APARTMENT) {
       setSubmitStatusType("danger")
-      setSubmitStatus("Provide an apartment number")
+      setSubmitStatus("Provide a valid apartment number")
       return false;
     }
     if(!message.comment) {
       setSubmitStatusType("danger")
       setSubmitStatus("Provide a comment")
+      return false;
+    }
+    if(message.comment.length>MAX_LENGTH_COMMENT) {
+      setSubmitStatusType("danger")
+      setSubmitStatus("Comment is longer than 1000 characters")
       return false;
     }
     return true;
@@ -76,8 +82,7 @@ function App() {
         <Col>
           <h1>Dear short-term tenants</h1>
           <p>
-          In case of a fire, call <b>112</b>, evacuate the building calmly, and contact your renter.<br/>
-          <a href="https://latvija.lv/en/DzivesSituacijas/tiesibu-aizsardziba/Personas_drosiba#show2">More about the emergency services in Latvia</a>
+          In case of a fire, evacuate the building calmly, call <b>112</b>, and contact your renter.<br/>
           </p>
           <p>
           Apartments on the 1st and 2nd floors have very sensitive smoke detectors that can trigger an alarm for the whole building even from a humidifier. Even so, safety is the top priority.
@@ -116,11 +121,11 @@ function App() {
           </Form.Group>
           <Form.Group>
             <Form.Label>Apartment number</Form.Label>
-            <Form.Control required type="number" defaultValue={1} min={1} max={maxApartment} onBlur={e => handleApartmentBlur(e)}/>
+            <Form.Control required type="number" defaultValue={1} min={1} max={MAX_APARTMENT} onBlur={e => handleApartmentBlur(e)}/>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label >Comment</Form.Label>
-            <Form.Control as="textarea" placeholder="...I burned my breakfast :(" onBlur={e => {
+            <Form.Control as="textarea" maxLength={MAX_LENGTH_COMMENT} placeholder="...I burned my breakfast :(" onBlur={e => {
               e.currentTarget.value=e.currentTarget.value.trim()
               setMessage({...message, comment:e.currentTarget.value})
               }}/>
