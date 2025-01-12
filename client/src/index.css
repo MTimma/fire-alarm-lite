@@ -85,12 +85,21 @@ h1 {
     width:  100vw;
     text-align: center;
   } 
-
-  #messages {
-    width:  350px;
+  #messages .toast {
+    width:  40vw
   }
 }
 
+@media (max-width: 400px){
+  #messages .toast {
+    width:  90vw;
+  }
+}
+
+#messages {
+  width:  90vw;
+  place-items: center;
+}
 #messages .toast {
   margin-bottom: 1rem;
 }

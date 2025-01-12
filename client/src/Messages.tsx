@@ -14,7 +14,7 @@ export interface Message {
   }
 
 const Messages = () => {
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState<Message[]>([])
     const getMessages = async () => {
       fetch("http://localhost:8080/messages")
       .then(res => res.json())
