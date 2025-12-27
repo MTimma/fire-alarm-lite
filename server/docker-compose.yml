@@ -5,6 +5,17 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
-      - "5050:5050"
-    restart: on-failure
+      - "8888:8888"
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=8888
+      - DATA_DIR=/app/data
+      - TIMEZONE=Europe/Riga
+      - ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
+    volumes:
+      - ./data:/app/data
+    deploy:
+      resources:
+        limits:
+          memory: 256M
